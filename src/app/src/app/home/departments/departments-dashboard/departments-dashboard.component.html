@@ -1,0 +1,11 @@
+<div *ngIf="loading">
+    <p>Loading Department Bar Chart.....</p>
+</div>
+<div *ngIf="!loading">
+    <h3 style="margin:auto;">Totals By Department</h3>
+    <ngx-charts-bar-vertical-2d [view]="[1200,600]" [scheme]="colorScheme" [results]="multi" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+        [legendTitle]="legendTitle">
+    </ngx-charts-bar-vertical-2d>
+</div>
