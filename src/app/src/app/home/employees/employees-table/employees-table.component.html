@@ -1,0 +1,80 @@
+<!-- <div class="mat-elevation-z8" style="width:100%;">
+    <table class="table">
+        <thead>
+            <th>Id</th>
+            <th>Dep. Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Absences</th>
+            <th>Rating</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of dataSource">
+                <td>{{ row.id }}</td>
+                <td>{{ row.dep_id }}</td>
+
+                <td>{{ row.name }}</td>
+
+                <td>{{ row.email }}</td>
+
+                <td>{{ row.gender }}</td>
+
+                <td>{{ row.absences }}</td>
+                <td>{{ row.rating }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"><a title="Naviagate to Edit Form">{{element.id}}</a></td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="dep_id">
+        <th mat-header-cell *matHeaderCellDef> Department ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.dep_id}} </td>
+    </ng-container>
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <!-- Name Column -->
+    <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="absences">
+        <th mat-header-cell *matHeaderCellDef> Days Sick </th>
+        <td mat-cell *matCellDef="let element"> {{element.absences}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" (click)="navigateToEditForm(row.id)"></tr>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+</table>

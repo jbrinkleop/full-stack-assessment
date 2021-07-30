@@ -1,0 +1,42 @@
+<div *ngIf="loading">
+    <p class="text-muted">Loading Information Employee: {{ routeId }}</p>
+</div>
+<div *ngIf="!loading">
+    <h1 class="text-center">Employee Form</h1>
+    <form (ngSubmit)="onSubmit()">
+        <input type="hidden" [(ngModel)]="employee.id" name="id" type="hidden" />
+        <div class="form-group row">
+            <label class="col-form-label col-sm-4">Department Id</label>
+            <select class="col-sm-8" [(ngModel)]="employee.dep_id" id="dep_id" name="dep_id">
+                <option *ngFor="let option of departmentOptions; let i = index" [value]="option.id">{{ option.name }}</option>
+            </select>
+        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [(ngModel)]="employee.name" id="name" name="name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" [(ngModel)]="employee.email" id="email" name="email" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <input matInput type="text" [(ngModel)]="employee.gender" id="gender" name="gender" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input matInput type="text" [(ngModel)]="employee.rating" id="rating" name="rating" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Sick Days</mat-label>
+            <input matInput type="number" [(ngModel)]="employee.absences" id="absences" name="absences" />
+        </mat-form-field>
+        <section>
+            <div class="row" style="margin:auto;">
+                <button type="button" mat-button color="primary" (click)="onSubmit()">Submit</button>
+                <button type="button" mat-button color="warm" (click)="delete()">Delete</button>
+                <button type="button" mat-button (click)="navigateToTable()">Cancel</button>
+            </div>
+        </section>
+    </form>
+</div>
