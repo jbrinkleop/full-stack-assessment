@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IEmployeeDetails extends JpaRepository<Employees, Integer> {
-    @Query(value = "SELECT * FROM employees", nativeQuery = true)
+    @Query(value = "SELECT * FROM employees emp inner join departments dept on emp.id = dept.id", nativeQuery = true)
     List<Employees> getEmployeeDetails();
 }

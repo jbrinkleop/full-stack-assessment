@@ -9,6 +9,7 @@ CREATE TABLE employees(
     id int AUTO_INCREMENT  PRIMARY KEY,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+    gender varchar(50) NOT NULL,
     dept_id int,
     FOREIGN KEY (dept_id) REFERENCES departments(id),
     email_id varchar(50) NOT NULL,

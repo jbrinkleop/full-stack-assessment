@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 @Getter
 @Setter
 public class Employees {
@@ -21,11 +21,15 @@ public class Employees {
    @Column(name ="last_name")
     private String lastName;
 
+   @Column(name="gender")
+   private String gender;
+
    @Column(name = "email_id")
     private String emailId;
 
-   @Column(name="dept_id")
-   private Integer deptId;
+   @ManyToOne
+   @JoinColumn(name="dept_id")
+   private Departments department;
 
    @Column(name="job_title")
     private String jobTitle;
