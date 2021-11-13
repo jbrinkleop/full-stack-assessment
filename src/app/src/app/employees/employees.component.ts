@@ -10,7 +10,7 @@ import { EmployeeDetails } from '../interfaces/employee-details.interface'
 export class EmployeesComponent implements OnInit {
 
   public employeeDetails: EmployeeDetails[] = [];
-  public displayedColumns: string[] = ['empId', 'firstName', 'lastName', 'jobTitle', 'emailId', 'serviceDate', 'empStatus'];
+  public displayedColumns: string[] = ['empId', 'firstName', 'lastName', 'gender', 'jobTitle', 'emailId', 'serviceDate', 'empStatus', 'department.deptName'];
   public showSpinner = true;
 
   constructor(
