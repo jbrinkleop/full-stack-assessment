@@ -16,11 +16,11 @@ import java.util.List;
 public class EmployeeDetailsController {
 
     @Autowired
-    EmployeeDetailsService employeeDetailsService;
+    EmployeeDetailsService employeeService;
 
     @GetMapping("/getEmployeeDetails")
     public List<Employees> getEmployeeDetails(){
-        return employeeDetailsService.getEmployeeDetails();
+        return employeeService.getEmployeeDetails();
     }
 
 }
