@@ -12,7 +12,7 @@ CREATE TABLE employees(
     gender varchar(50) NOT NULL,
     dept_id int,
     FOREIGN KEY (dept_id) REFERENCES departments(id),
-    email_id varchar(50) NOT NULL,
+    email_id varchar(50) UNIQUE NOT NULL,
     job_title varchar (100) NOT NULL,
     emp_status varchar (30) DEFAULT 'Active',
     service_date date NOT NULL,

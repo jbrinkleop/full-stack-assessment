@@ -1,5 +1,6 @@
 package com.observepoint.test.test.controller;
 
+import com.observepoint.test.test.model.Departments;
 import com.observepoint.test.test.service.DepartmentDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,8 +18,8 @@ public class DepartmentDetailsController {
     @Autowired
     DepartmentDetailsService departmentService;
 
-    @GetMapping("/getDepartmentNames")
-    public List<String> getDepartmentNames(){
-        return departmentService.getDepartmentNames();
+    @GetMapping("/getDepartments")
+    public List<Departments> getDepartments(){
+        return departmentService.getAllDepartments();
     }
 }

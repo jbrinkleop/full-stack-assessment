@@ -1,5 +1,6 @@
 package com.observepoint.test.test.service;
 
+import com.observepoint.test.test.model.Departments;
 import com.observepoint.test.test.repository.IDepartmentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ public class DepartmentDetailsService {
     @Autowired
     IDepartmentDetails departmentDetails;
 
-    public List<String> getDepartmentNames(){
-        List<String> departmentNames = departmentDetails.getDepartmentNames();
-        return departmentNames;
+    public List<Departments> getAllDepartments () {
+        return departmentDetails.findAll();
     }
+
 }
