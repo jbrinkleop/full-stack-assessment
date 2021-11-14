@@ -1,0 +1,51 @@
+<div class = "container">
+    <h2 class="heading">Add a New Employee</h2>
+    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+        <mat-form-field hintLabel="Max 20 characters" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput #input maxlength="20" placeholder="First Name" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field hintLabel="Max 20 characters" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput #input maxlength="20" placeholder="Last Name Name" formControlName="lastName">
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+                <mat-option *ngFor="let genderType of genders" value="option">
+                    {{genderType}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department">
+                <mat-option *ngFor="let department of departments" value="option">
+                    {{department.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+                <mat-label>Job Title</mat-label>
+                <mat-select formControlName="jobTitle"> 
+                    <mat-option *ngFor="let job of jobTitles" value="option">
+                        {{job}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" >
+            <mat-label>Date of Joining</mat-label>
+            <input matInput [matDatepicker]="datepicker" formControlName="dateOfJoining">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+        </button>
+    </form>
+</div>

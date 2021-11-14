@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee.service';
-import { EmployeeDetails } from '../interfaces/employee-details.interface'
+import { EmployeeService } from '../../services/employee.service';
+import { EmployeeDetails } from '../../interfaces/employee-details.interface'
 
 @Component({
   selector: 'app-employees',
-  templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  templateUrl: './employees-home.component.html',
+  styleUrls: ['./employees-home.component.scss']
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesHomeComponent implements OnInit {
 
   public employeeDetails: EmployeeDetails[] = [];
-  public displayedColumns: string[] = ['empId', 'firstName', 'lastName', 'gender', 'jobTitle', 'emailId', 'serviceDate', 'empStatus', 'department.deptName'];
+  public displayedColumns: string[] = ['empId', 'firstName', 'lastName', 'gender', 'department.deptName', 'jobTitle', 'emailId', 'serviceDate', 'empStatus'];
   public showSpinner = true;
 
   constructor(
