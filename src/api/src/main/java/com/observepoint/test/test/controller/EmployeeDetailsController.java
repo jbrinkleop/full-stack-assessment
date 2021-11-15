@@ -24,4 +24,9 @@ public class EmployeeDetailsController {
     public void insertEmployee (@RequestBody Employees employee){
         employeeService.insertEmployee(employee);
     }
+
+    @DeleteMapping("/deleteEmployee/{id}")
+    public void deleteEmployee(@PathVariable Integer id){
+        employeeService.deleteEmployee(id);
+    }
 }

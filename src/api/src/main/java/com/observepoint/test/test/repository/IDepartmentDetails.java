@@ -15,4 +15,5 @@ public interface IDepartmentDetails extends JpaRepository<Departments, Integer> 
 
     @Query(value = "SELECT id FROM departments WHERE name = ?1", nativeQuery = true)
     Integer getDepartmentId(String deptName);
+
 }

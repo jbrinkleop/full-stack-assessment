@@ -6,6 +6,7 @@ import com.observepoint.test.test.repository.IEmployeeDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -43,11 +44,15 @@ public class EmployeeDetailsService {
     }
 
     public void insertEmployee(Employees employee){
-        String emailPrefix = employee.getFirstName()+'.'+employee.getLastName();
+        String emailPrefix = employee.getFirstName().toLowerCase()+'.'+employee.getLastName().toLowerCase();
         List<String> matchingEmailIds  = getMatchingEmailIds(emailPrefix);
         String emailId = generateUniqueEmailId(matchingEmailIds, emailPrefix);
         employee.setEmailId(emailId);
         employeeDao.insertEmployeeDetails(employee);
+    }
+
+    public void deleteEmployee(Integer empId){
+        employeeDao.deleteEmployeeDetails(empId);
     }
 
 }

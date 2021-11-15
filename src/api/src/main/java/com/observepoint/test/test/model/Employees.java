@@ -2,6 +2,8 @@ package com.observepoint.test.test.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,26 +15,26 @@ import java.sql.Date;
 public class Employees {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+   private int id;
    
    @Column(name = "first_name")
-    private String firstName;
+   private String firstName;
 
    @Column(name ="last_name")
-    private String lastName;
+   private String lastName;
 
    @Column(name="gender")
    private String gender;
 
    @Column(name = "email_id")
-    private String emailId;
+   private String emailId;
 
-   @ManyToOne
+   @ManyToOne()
    @JoinColumn(name="dept_id")
    private Departments department;
 
    @Column(name="job_title")
-    private String jobTitle;
+   private String jobTitle;
 
    @Column(name="emp_status")
    private String empStatus;
