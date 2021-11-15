@@ -13,11 +13,19 @@ export class EmployeeService {
     private httpClient: HttpClient
   ) { }
 
-  /**
-   * Fetch employee details
-   */
+
   public getEmployeeDetails(): Observable<EmployeeDetails[]>{
     const url = environment.BASE_URL+"/api/employee/getEmployeeDetails";
     return this.httpClient.get<EmployeeDetails[]>(url);
+  }
+
+  public addEmployeeDetails(employeeDetails: EmployeeDetails): Observable<Object> {
+    const url = environment.BASE_URL+"/api/employee/addEmployee";
+    return this.httpClient.post(url, employeeDetails);            
+  }
+
+  public deleteEmployeeById(empId: number): Observable<Object>{
+    const url = environment.BASE_URL+"/api/employee/deleteEmployee/"+empId;
+    return this.httpClient.delete(url);
   }
 }

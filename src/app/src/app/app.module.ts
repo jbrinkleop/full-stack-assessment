@@ -15,8 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
-
 import { EmployeesHomeComponent } from './employees/employees-home/employees-home.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { AddEmployeesComponent } from './employees/add-employees/add-employees.component';
@@ -45,9 +45,9 @@ import { AddEmployeesComponent } from './employees/add-employees/add-employees.c
     MatNativeDateModule,
     MatIconModule,
     FormsModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
