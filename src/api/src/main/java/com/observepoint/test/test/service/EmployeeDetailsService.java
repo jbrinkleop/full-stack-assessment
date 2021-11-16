@@ -78,4 +78,13 @@ public class EmployeeDetailsService {
         }
     }
 
+    @Transactional
+    public ServerResponse updateEmployee(Integer empId, String jobTitle){
+        try{
+            employeeDetailsRepo.updateEmployee(empId, jobTitle);
+            return new ServerResponse(true, "Update was successful");
+        } catch (Exception exception){
+            return new ServerResponse(false, "Update Failed");
+        }
+    }
 }

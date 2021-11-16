@@ -19,9 +19,11 @@ public interface IEmployeeDetails extends JpaRepository<Employees, Integer> {
     @Query(value = "SELECT emp.email_id FROM employees emp WHERE emp.email_id LIKE ?1%", nativeQuery = true)
     List<String> getExistingEmailIds(String emailId);
 
-    @Query(value = "SELECT emp.dept_id FROM employees emp where id = ?1", nativeQuery = true)
-    Integer getDeptId(Integer empId);
+    @Modifying
+    @Query(value = "UPDATE EMPLOYEES emp SET emp.job_title = ?2 where emp.id = ?1", nativeQuery = true)
+    void updateEmployee(Integer empId, String jobTitle);
 
+    // To delete employee row which has foreign key reference, first set the foreign key to null to avoid integrity violation exception
     @Modifying
     @Query(value = "UPDATE EMPLOYEES emp SET emp.dept_id = null where id = ?1", nativeQuery = true)
     void updateDeptId(Integer empId);

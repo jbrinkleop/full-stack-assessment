@@ -36,12 +36,7 @@ public class Employees {
    @Column(name="job_title")
    private String jobTitle;
 
-   @Column(name="emp_status")
-   private String empStatus;
+   @Column(name = "date_of_birth")
+    private Date dateOfBirth;
 
-   @Column(name = "service_date")
-    private Date serviceDate;
-
-   @Column(name = "end_date")
-    private Date endDate;
 }

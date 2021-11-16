@@ -14,9 +14,7 @@ CREATE TABLE employees(
     FOREIGN KEY (dept_id) REFERENCES departments(id),
     email_id varchar(50) UNIQUE NOT NULL,
     job_title varchar (100) NOT NULL,
-    emp_status varchar (30) DEFAULT 'Active',
-    service_date date NOT NULL,
-    end_date date
+    date_of_birth date NOT NULL
 );
 
 
