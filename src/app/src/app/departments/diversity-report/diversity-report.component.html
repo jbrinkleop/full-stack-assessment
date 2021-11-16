@@ -1,0 +1,12 @@
+<mat-spinner class="spinner" *ngIf="showSpinner"></mat-spinner>
+<div *ngFor = "let item of diversityMap | keyvalue" class="container">
+    <h2>{{item.key}}</h2>
+    <canvas 
+        baseChart 
+        [data]= item.value[0].genderCount
+        [labels]= item.value[0].gender
+        [chartType]="pieChartType"
+        [options]="pieChartOptions" 
+        [colors]="pieChartColors">
+    </canvas>
+</div>

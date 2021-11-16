@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmployeesHomeComponent } from './employees/employees-home/employees-home.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { AddEmployeesComponent } from './employees/add-employees/add-employees.component';
+import { DiversityReportComponent } from './departments/diversity-report/diversity-report.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { AddEmployeesComponent } from './employees/add-employees/add-employees.c
     HomeComponent,
     EmployeesHomeComponent,
     DepartmentsComponent,
-    AddEmployeesComponent
+    AddEmployeesComponent,
+    DiversityReportComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { AddEmployeesComponent } from './employees/add-employees/add-employees.c
     MatIconModule,
     FormsModule,
     MatSnackBarModule,
+    ChartsModule,
     ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
