@@ -13,6 +13,12 @@ export interface EmployeeDetails {
     empStatus?: string;
 }
 
+export interface EmployeeDetailsResponse {
+    status: boolean,
+    message: string,
+    employeeList: Array<EmployeeDetails>
+}
+
 export interface Form {
     firstName: string;
     lastName: string;

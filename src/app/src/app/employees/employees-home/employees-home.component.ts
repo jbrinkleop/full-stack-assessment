@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
-import { EmployeeDetails } from '../../interfaces/employee-details.interface';
+import { EmployeeDetails, EmployeeDetailsResponse } from '../../interfaces/employee-details.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -24,8 +24,8 @@ export class EmployeesHomeComponent implements OnInit {
   }
 
   public fetchEmployeeDetails(){
-    this.employeeService.getEmployeeDetails().subscribe((employee: EmployeeDetails[]) => {
-      this.employeeDetails = employee;
+    this.employeeService.getEmployeeDetails().subscribe((employee: EmployeeDetailsResponse) => {
+      this.employeeDetails = employee.employeeList;
       this.showSpinner = false;
     }, (error: Error) => {
       this.showSpinner = false;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../utils/environment';
-import { EmployeeDetails } from '../interfaces/employee-details.interface'
+import { EmployeeDetails, EmployeeDetailsResponse } from '../interfaces/employee-details.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,9 @@ export class EmployeeService {
   ) { }
 
 
-  public getEmployeeDetails(): Observable<EmployeeDetails[]>{
+  public getEmployeeDetails(): Observable<EmployeeDetailsResponse>{
     const url = environment.BASE_URL+"/api/employee/getEmployeeDetails";
-    return this.httpClient.get<EmployeeDetails[]>(url);
+    return this.httpClient.get<EmployeeDetailsResponse>(url);
   }
 
   public addEmployeeDetails(employeeDetails: EmployeeDetails): Observable<Object> {
