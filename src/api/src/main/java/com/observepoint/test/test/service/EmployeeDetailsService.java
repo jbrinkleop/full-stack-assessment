@@ -5,6 +5,7 @@ import com.observepoint.test.test.model.Employees;
 import com.observepoint.test.test.model.ServerResponse;
 import com.observepoint.test.test.model.response.EmployeeDetailsResponse;
 import com.observepoint.test.test.repository.IEmployeeDetails;
+import com.observepoint.test.test.repository.IJobTitles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class EmployeeDetailsService {
     EmployeeDao employeeDao;
 
     @Autowired
-    DepartmentDetailsService departmentDetailsService;
+    IJobTitles jobTitlesRepo;
 
     public ServerResponse getEmployeeDetails(){
         try {
@@ -86,5 +87,10 @@ public class EmployeeDetailsService {
         } catch (Exception exception){
             return new ServerResponse(false, "Update Failed");
         }
+    }
+
+    // Job Titles
+    public List<String> getJobTitles(){
+        return jobTitlesRepo.getJobTitles();
     }
 }

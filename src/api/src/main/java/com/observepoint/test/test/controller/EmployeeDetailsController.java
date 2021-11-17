@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/employee")
@@ -38,6 +40,11 @@ public class EmployeeDetailsController {
     public ResponseEntity<ServerResponse> editEmployeeDetails(@RequestBody UpdateRequest updateRequest){
         ServerResponse serverResponse = employeeService.updateEmployee(updateRequest.getEmpId(),updateRequest.getJobTitle());
         return ResponseEntity.ok().body(serverResponse);
+    }
+
+    @GetMapping("/jobTitles")
+    public List<String> getJobTitles(){
+        return employeeService.getJobTitles();
     }
 
 }
