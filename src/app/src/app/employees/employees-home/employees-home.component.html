@@ -1,56 +1,68 @@
 <mat-spinner class="spinner" *ngIf="showSpinner"></mat-spinner>
 <app-add-employees (refreshTable) = "fetchEmployeeDetails()"></app-add-employees>
-<table mat-table [dataSource]="employeeDetails" class="mat-elevation-z8">
-    <ng-container matColumnDef="empId">
-        <th mat-header-cell *matHeaderCellDef> Employee ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef> First Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
-    <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef> Last Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-    </ng-container>
-    <ng-container matColumnDef="gender">
-        <th mat-header-cell *matHeaderCellDef> Gender </th>
-        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-    </ng-container>
-    <ng-container matColumnDef="department.deptName">
-        <th mat-header-cell *matHeaderCellDef> Department </th>
-        <td mat-cell *matCellDef="let element"> {{element.department.deptName}} </td>
-    </ng-container>
-    <ng-container matColumnDef="jobTitle">
-        <th mat-header-cell *matHeaderCellDef> Job Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.jobTitle}} </td>
-    </ng-container>
-    <ng-container matColumnDef="emailId">
-        <th mat-header-cell *matHeaderCellDef> Email ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
-    </ng-container>
-    <ng-container matColumnDef="serviceDate">
-        <th mat-header-cell *matHeaderCellDef> Date of Joining </th>
-        <td mat-cell *matCellDef="let element"> {{element.serviceDate}} </td>
-    </ng-container>
-    <ng-container matColumnDef="empStatus">
-        <th mat-header-cell *matHeaderCellDef> Employment Status </th>
-        <td  mat-cell *matCellDef="let element"> {{element.empStatus}} </td>
-        <td  mat-cell *matCellDef="let element"> {{element.empStatus}} </td>
-    </ng-container>
-    <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef>Modify Records</th>
-        <td mat-cell *matCellDef="let element"> 
-            <button mat-button color="primary">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-button color="primary" (click)="deleteEmployee(element.id)" >
-                <mat-icon>delete</mat-icon>
-            </button>            
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-    </tr>
-</table>
-
+<form [formGroup]="employeeForm">
+    <table mat-table [dataSource]="employeeDetails" class="mat-elevation-z8">
+        <ng-container matColumnDef="empId">
+            <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef> Gender </th>
+            <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+        <ng-container matColumnDef="department.deptName">
+            <th mat-header-cell *matHeaderCellDef> Department </th>
+            <td mat-cell *matCellDef="let element"> {{element.department.deptName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="jobTitle">
+            <th mat-header-cell *matHeaderCellDef> Designation </th>
+            <td mat-cell *matCellDef="let element"> 
+                <div *ngIf = "!element.isEditable">
+                    {{element.jobTitle}}     
+                <button mat-button color="primary">
+                    <mat-icon *ngIf="!element.isEditable" (click)= "editEmployee(element)" >edit</mat-icon>  
+                </button> 
+                </div>
+                <mat-form-field  *ngIf = "element.isEditable" appearance="fill">
+                    <mat-label>Designation</mat-label>            
+                    <mat-select formControlName="jobTitle" [(ngModel)]="element.jobTitle" [placeholder]="element.jobTitle"> 
+                        <mat-option *ngFor="let job of jobTitles" value={{job}}>
+                            {{job}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-button color="primary">
+                    <mat-icon *ngIf="element.isEditable" (click)= "saveChanges(element.id, element, employeeForm.value)">check</mat-icon>
+                    <mat-icon *ngIf="element.isEditable" (click)= "cancelEdit(element)" >cancel</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="emailId">
+            <th mat-header-cell *matHeaderCellDef> Email ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dateOfBirth">
+            <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateOfBirth}} </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete Records</th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-button color="primary" (click)="deleteEmployee(element.id)" >
+                    <mat-icon>delete</mat-icon>
+                </button>            
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+</form>

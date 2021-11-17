@@ -22,8 +22,11 @@ export class AddEmployeesComponent implements OnInit {
   @ViewChild(FormGroupDirective) ngFormDirective: FormGroupDirective;
 
   public genders = ['Male', 'Female', 'Transgender', 'Non-Binary', 'Not Disclosed'];
-  public jobTitles = ['Software Engineer', 'Analyst', 'Accountant', 'Manager', 'Director', 'CEO'];
+  public jobTitles: string[] = [];
+  
   public departments: DepartmentDetails[] = [];
+  public startDate = new Date(1998, 0, 1);
+  public showSpinner = false;
   
 
   public employeeForm = this.formBuilder.group({
@@ -32,7 +35,7 @@ export class AddEmployeesComponent implements OnInit {
     gender:  ['', [Validators.required]],
     department:  ['', [Validators.required]],
     jobTitle:  ['', [Validators.required]],
-    serviceDate:  ['', [Validators.required]]
+    dateOfBirth:  ['', [Validators.required]]
   });
 
   constructor(
@@ -44,41 +47,46 @@ export class AddEmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDepartments();
+    this.getJobTitles();
   }
 
   public getDepartments(): void{
     this.departmentService.getDepartments().subscribe((departments: DepartmentDetails[]) => {
-      this.departments = departments;
+      if(departments.length >0){
+        this.departments = departments;        
+      }
     }, (error: Error) => {
     });
   }
 
-  public formatFormEntries(formValues: Form ):EmployeeDetails {
+  public formatFormEntries(formValues: Form ): EmployeeDetails {
     let department = this.departments.filter(dept => {
       return (dept.deptName === formValues.department);
     });
-    let date = formValues.serviceDate.getDate();
-    formValues.serviceDate.getDate();
+    let date = formValues.dateOfBirth.getDate();
+    formValues.dateOfBirth.getDate();
     let employeeDetails =  {
       firstName: formValues.firstName,
       lastName: formValues.lastName,
       jobTitle: formValues.jobTitle,
       gender: formValues.gender,
       department: department[0],
-      empStatus: 'Active',
-      serviceDate: moment(formValues.serviceDate.toDateString()).format("yyyy-MM-DD")
+      dateOfBirth: moment(formValues.dateOfBirth.toDateString()).format("yyyy-MM-DD")
     }
     return employeeDetails;
   }
 
   public addEmployee(formValues: Form): void {
+    this.showSpinner = true
     let employeeDetails = this.formatFormEntries(formValues);
     this.employeeService.addEmployeeDetails(employeeDetails).subscribe(() => {
+      this.showSpinner = false;
       this.snackBar.open('Employee details were saved successfully', 'OK', {
         duration: 5000
       });
       this.refreshEmployeeDetails();
     }, error => {
+      this.showSpinner = false;
       this.snackBar.open('Something went wrong. Employee details were not saved', 'OK', {
         duration: 5000
       });
@@ -93,6 +101,16 @@ export class AddEmployeesComponent implements OnInit {
   public resetForm(){
     this.ngFormDirective.resetForm();
     this.employeeForm.reset(); 
+  }
+
+  public getJobTitles(){
+    this.employeeService.getJobTitles().subscribe(jobs => {
+      this.jobTitles = jobs;
+    }, (error) => {
+      this.snackBar.open('Something went wrong. Cannot get job titles', 'OK', {
+        duration: 5000
+      });
+    });
   }
 
 

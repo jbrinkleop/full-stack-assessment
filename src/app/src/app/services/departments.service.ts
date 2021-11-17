@@ -25,4 +25,9 @@ export class DepartmentsService {
     const url = environment.BASE_URL+"/api/department/reports/getDiversity";
     return this.httpClient.get<Diversity[]>(url);
   }
+
+  public addNewDepartment(departmentDetails: DepartmentDetails): Observable<any> {
+    const url = environment.BASE_URL+"/api/department/addDepartment";
+    return this.httpClient.post(url, departmentDetails);            
+  }
 }

@@ -8,9 +8,8 @@ export interface EmployeeDetails {
     gender: string;
     department: DepartmentDetails
     emailId?: string;
-    serviceDate: string;
-    endDate?: Date;
-    empStatus?: string;
+    dateOfBirth: string;
+    isEditable?: boolean;
 }
 
 export interface EmployeeDetailsResponse {
@@ -25,6 +24,10 @@ export interface Form {
     jobTitle: string;
     gender: string;
     department: string
-    serviceDate: Date;
-    empStatus: string;
+    dateOfBirth: Date;
+}
+
+export interface EmployeeUpdateDetails {
+    empId: number;
+    jobTitle: string;
 }
